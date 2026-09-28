@@ -196,7 +196,7 @@ InfoTab:AddSection({ "ENTRE NO NOSSO SERVER" })
 InfoTab:AddDiscordInvite({
    Name = "entre no nosso server do Discord!",
    Description = "ainda nao temos mais logo teremos.",
-   Logo = "rbxassetid://123784982520259",
+   Logo = "rbxassetid://118444640982733",
    Invite = "",
 })
 
