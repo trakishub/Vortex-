@@ -1,7 +1,7 @@
 -- Bio
 game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer(unpack({
     "RolePlayBio",
-    "| best script |",
+    "| Vortex Hub best script |",
 }))
 
 -- Nome
