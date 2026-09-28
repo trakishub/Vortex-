@@ -5848,34 +5848,39 @@ local function CreatePlayerTag(playerName, tagText)
     local billboardGui = Instance.new("BillboardGui")
     billboardGui.Name = "KitK4tTag"
     billboardGui.Adornee = head
-    billboardGui.Size = UDim2.new(0, 150, 0, 30)
+    billboardGui.Size = UDim2.new(0, 130, 0, 32)
     billboardGui.AlwaysOnTop = true
     billboardGui.StudsOffset = Vector3.new(0, 2.5, 0)
     billboardGui.MaxDistance = 120
     billboardGui.Parent = head
 
-    -- Substituído Frame por ImageLabel para suportar a imagem de fundo
-    local background = Instance.new("ImageLabel", billboardGui)
+    -- Container principal mantendo exatamente as suas cores originais
+    local background = Instance.new("Frame", billboardGui)
     background.Size = UDim2.new(1, 0, 1, 0)
-    background.BackgroundTransparency = 1
-    background.Image = "rbxassetid://84509919481682" -- ID da imagem de fundo
+    background.BackgroundColor3 = Color3.fromRGB(200, 250, 200) -- Suas cores mantidas
+    background.BackgroundTransparency = 0.5 -- Sua transparência mantida
     background.BorderSizePixel = 0
-    Instance.new("UICorner", background).CornerRadius = UDim.new(0, 6)
 
+    -- Formato em pílula arredondada ajustado conforme a imagem
+    local uiCorner = Instance.new("UICorner", background)
+    uiCorner.CornerRadius = UDim.new(0.5, 0)
+
+    -- Borda mantendo exatamente as suas cores originais
+    local stroke = Instance.new("UIStroke", background)
+    stroke.Color = Color3.fromRGB(0, 255, 50) -- Seu tom de verde mantido
+    stroke.Thickness = 2.5
+    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+    -- Texto mantendo exatamente as suas cores e fontes originais
     local textLabel = Instance.new("TextLabel", background)
-    textLabel.Size = UDim2.new(1, -8, 1, -8)
-    textLabel.Position = UDim2.new(0, 4, 0, 4)
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
     textLabel.BackgroundTransparency = 1
-    textLabel.Text = tagText
-    textLabel.TextColor3 = Color3.fromRGB(170, 0, 255) -- Cor do texto alterada para roxo
-    textLabel.TextSize = 12
+    textLabel.Text = string.upper(tagText)
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.TextSize = 14
     textLabel.Font = Enum.Font.GothamBold
-    textLabel.TextStrokeTransparency = 0
-    textLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
-
-    local glowEffect = Instance.new("UIStroke", background)
-    glowEffect.Color = Color3.fromRGB(170, 0, 255) -- Borda alterada para roxo
-    glowEffect.Thickness = 1
+    textLabel.TextStrokeTransparency = 0.2
+    textLabel.TextStrokeColor3 = Color3.fromRGB(30, 30, 30)
 
     ActiveTags[playerName] = { Billboard = billboardGui, TagText = tagText }
 end
