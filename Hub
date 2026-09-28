@@ -9088,7 +9088,7 @@ local function CreatePlayerTag(playerName, tagText)
     background.Size = UDim2.new(1, 0, 1, 0)
     
     -- Substitua pelo ID da imagem do Roblox que você quer usar de fundo
-    background.Image = "rbxassetid://84509919481682" 
+    background.Image = "rbxassetid://" 
     
     -- Cor de fundo e tom da imagem em Roxo mais Escuro
     background.ImageColor3 = Color3.fromRGB(60, 20, 90)
