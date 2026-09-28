@@ -5820,8 +5820,8 @@ local function IsPlayerAuthorized(playerName)
 end
 
 local function GetCargo(playerName)
-    if getgenv().KitKatConfig.SpecialTags[playerName] then
-        return getgenv().KitKatConfig.SpecialTags[playerName]
+    if getgenv().VortexConfig.SpecialTags[playerName] then
+        return getgenv().VortexConfig.SpecialTags[playerName]
     elseif IsPlayerAuthorized(playerName) then
         return "Moderador Trakis"
     end
@@ -5846,7 +5846,7 @@ local function CreatePlayerTag(playerName, tagText)
     RemovePlayerTag(playerName)
 
     local billboardGui = Instance.new("BillboardGui")
-    billboardGui.Name = "KitK4tTag"
+    billboardGui.Name = "VortexTag"
     billboardGui.Adornee = head
     billboardGui.Size = UDim2.new(0, 130, 0, 32)
     billboardGui.AlwaysOnTop = true
@@ -5854,39 +5854,40 @@ local function CreatePlayerTag(playerName, tagText)
     billboardGui.MaxDistance = 120
     billboardGui.Parent = head
 
-    -- Container de fundo alterado para ImageLabel
+    -- Container de fundo com Imagem e Roxo Escuro
     local background = Instance.new("ImageLabel", billboardGui)
     background.Size = UDim2.new(1, 0, 1, 0)
     
-    -- ID da Imagem (Substitua pelos números do Asset ID da sua imagem do Roblox)
-    background.Image = "rbxassetid://84509919481682" 
+    -- Substitua pelo ID da imagem do Roblox que você quer usar de fundo
+    background.Image = "rbxassetid://SUA_IMAGEM_AQUI" 
     
-    -- Tom roxo aplicado sobre a imagem (use Color3.fromRGB(255, 255, 255) se não quiser alterar a cor da imagem)
-    background.ImageColor3 = Color3.fromRGB(140, 50, 255) 
-    background.BackgroundTransparency = 1 -- Mantém o fundo do elemento transparente para exibir a imagem
+    -- Cor de fundo e tom da imagem em Roxo mais Escuro
+    background.ImageColor3 = Color3.fromRGB(60, 20, 90)
+    background.BackgroundColor3 = Color3.fromRGB(60, 20, 90)
+    background.BackgroundTransparency = 0.2 -- Ajuste se quiser ver mais/menos a cor base
     background.BorderSizePixel = 0
-    background.ScaleType = Enum.ScaleType.Crop -- Ajusta a imagem ao tamanho do container
+    background.ScaleType = Enum.ScaleType.Crop
 
-    -- Arredondamento dos cantos
+    -- Formato em pílula
     local uiCorner = Instance.new("UICorner", background)
     uiCorner.CornerRadius = UDim.new(0.5, 0)
 
-    -- Borda em tom roxo escuro/brilhante
+    -- Borda em tom roxo escuro combinando
     local stroke = Instance.new("UIStroke", background)
-    stroke.Color = Color3.fromRGB(180, 70, 255)
+    stroke.Color = Color3.fromRGB(110, 40, 160)
     stroke.Thickness = 2.5
     stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
-    -- Texto da Tag
+    -- Texto/Nome em tom Roxo Brilhante
     local textLabel = Instance.new("TextLabel", background)
     textLabel.Size = UDim2.new(1, 0, 1, 0)
     textLabel.BackgroundTransparency = 1
     textLabel.Text = string.upper(tagText)
-    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.TextColor3 = Color3.fromRGB(190, 100, 255) -- Nome roxo
     textLabel.TextSize = 14
     textLabel.Font = Enum.Font.GothamBold
     textLabel.TextStrokeTransparency = 0.2
-    textLabel.TextStrokeColor3 = Color3.fromRGB(30, 30, 30)
+    textLabel.TextStrokeColor3 = Color3.fromRGB(20, 10, 30)
 
     ActiveTags[playerName] = { Billboard = billboardGui, TagText = tagText }
 end
