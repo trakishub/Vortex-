@@ -5854,24 +5854,30 @@ local function CreatePlayerTag(playerName, tagText)
     billboardGui.MaxDistance = 120
     billboardGui.Parent = head
 
-    -- Container principal mantendo exatamente as suas cores originais
-    local background = Instance.new("Frame", billboardGui)
+    -- Container de fundo alterado para ImageLabel
+    local background = Instance.new("ImageLabel", billboardGui)
     background.Size = UDim2.new(1, 0, 1, 0)
-    background.BackgroundColor3 = Color3.fromRGB(200, 250, 200) -- Suas cores mantidas
-    background.BackgroundTransparency = 0.5 -- Sua transparência mantida
+    
+    -- ID da Imagem (Substitua pelos números do Asset ID da sua imagem do Roblox)
+    background.Image = "rbxassetid://84509919481682" 
+    
+    -- Tom roxo aplicado sobre a imagem (use Color3.fromRGB(255, 255, 255) se não quiser alterar a cor da imagem)
+    background.ImageColor3 = Color3.fromRGB(140, 50, 255) 
+    background.BackgroundTransparency = 1 -- Mantém o fundo do elemento transparente para exibir a imagem
     background.BorderSizePixel = 0
+    background.ScaleType = Enum.ScaleType.Crop -- Ajusta a imagem ao tamanho do container
 
-    -- Formato em pílula arredondada ajustado conforme a imagem
+    -- Arredondamento dos cantos
     local uiCorner = Instance.new("UICorner", background)
     uiCorner.CornerRadius = UDim.new(0.5, 0)
 
-    -- Borda mantendo exatamente as suas cores originais
+    -- Borda em tom roxo escuro/brilhante
     local stroke = Instance.new("UIStroke", background)
-    stroke.Color = Color3.fromRGB(0, 255, 50) -- Seu tom de verde mantido
+    stroke.Color = Color3.fromRGB(180, 70, 255)
     stroke.Thickness = 2.5
     stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
-    -- Texto mantendo exatamente as suas cores e fontes originais
+    -- Texto da Tag
     local textLabel = Instance.new("TextLabel", background)
     textLabel.Size = UDim2.new(1, 0, 1, 0)
     textLabel.BackgroundTransparency = 1
@@ -5884,6 +5890,7 @@ local function CreatePlayerTag(playerName, tagText)
 
     ActiveTags[playerName] = { Billboard = billboardGui, TagText = tagText }
 end
+
 
 local function createSpecialTag(player)
     if not player then return end
