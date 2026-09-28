@@ -5858,7 +5858,7 @@ local function CreatePlayerTag(playerName, tagText)
     local background = Instance.new("ImageLabel", billboardGui)
     background.Size = UDim2.new(1, 0, 1, 0)
     background.BackgroundTransparency = 1
-    background.Image = "rbxassetid://126754882337711" -- ID da imagem de fundo
+    background.Image = "rbxassetid://84509919481682" -- ID da imagem de fundo
     background.BorderSizePixel = 0
     Instance.new("UICorner", background).CornerRadius = UDim.new(0, 6)
 
