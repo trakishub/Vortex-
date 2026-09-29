@@ -10950,7 +10950,7 @@ if BoardLabel then
         end
     end)
 else
-    warn("[Trakis Hub] BoardLabel não foi encontrado, comandos pelo quadro desativados.")
+    warn("[Vortex Hub] BoardLabel não foi encontrado, comandos pelo quadro desativados.")
 end
 
 -- ================================
@@ -10962,18 +10962,18 @@ local LocalPlayer = Players.LocalPlayer
 -- ================================
 -- WINDUI - INTERFACE
 -- ================================
-Trakis_USERS = Trakis_USERS or {}
-Trakis_USERS[LocalPlayer.Name] = true
+Vortex_USERS = Trakis_USERS or {}
+Vortex_USERS[LocalPlayer.Name] = true
 
 if not IsPlayerAuthorized(LocalPlayer.Name) then
-    warn("⚠️ Você não está autorizado a usar o Trakis Hub Admin")
+    warn("⚠️ Você não está autorizado a usar o Vortex Hub Admin")
     warn("⚠️ Seu username: " .. LocalPlayer.Name)
     return
 end
 
 print("✅ Usuário autorizado: " .. LocalPlayer.Name)
 print("✅ Cargo: " .. GetCargo(LocalPlayer.Name))
-print("✅ Carregando Trakis Hub Admin...")
+print("✅ Carregando Vortex Hub Admin...")
 
 -- ================================
 -- CARREGAR WINDUI
@@ -10991,7 +10991,7 @@ end)
 if success and result then
     WindUI = result
 else
-    warn("[Trakid Hub] Falha ao carregar WindUI.")
+    warn("[Vortex Hub] Falha ao carregar WindUI.")
     warn(result)
     return
 end
