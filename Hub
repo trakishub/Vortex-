@@ -9017,7 +9017,100 @@ ScrTab:AddButton({
 
 
 
---tags
+-- painel admin 
+
+--// Serviços
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = workspace
+local Debris = game:GetService("Debris")
+local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
+
+local LocalPlayer = Players.LocalPlayer
+
+-- ================================
+-- LIMPEZA DE EXECUÇÃO ANTERIOR
+-- ================================
+if getgenv().KitK4t_Connections then
+    for _, conn in ipairs(getgenv().KitK4t_Connections) do
+        pcall(function() conn:Disconnect() end)
+    end
+end
+getgenv().KitK4t_Connections = {}
+
+if getgenv().KitK4t_Threads then
+    for _, thread in ipairs(getgenv().KitK4t_Threads) do
+        pcall(function() task.cancel(thread) end)
+    end
+end
+getgenv().KitK4t_Threads = {}
+
+pcall(function()
+    local old = CoreGui:FindFirstChild("KitK4tAdminHub")
+    if old then old:Destroy() end
+end)
+
+local function trackConnection(conn)
+    table.insert(getgenv().KitK4t_Connections, conn)
+    return conn
+end
+
+local function trackThread(thread)
+    table.insert(getgenv().KitK4t_Threads, thread)
+    return thread
+end
+
+repeat task.wait() until LocalPlayer.Character
+
+--// Board Count (escrita)
+local BoardCount =
+    workspace:WaitForChild("WorkspaceCom")
+    :WaitForChild("001_School")
+    :WaitForChild("SchoolDryBoard")
+    :WaitForChild("Words")
+    :WaitForChild("Count")
+
+--// Board Label (leitura automática)
+local Words =
+    workspace:WaitForChild("WorkspaceCom")
+    :WaitForChild("001_School")
+    :WaitForChild("SchoolDryBoard")
+    :WaitForChild("Words")
+
+--// Board Label (leitura automática e segura)
+local BoardLabel = Words:FindFirstChildWhichIsA("TextLabel", true)
+
+if not BoardLabel then
+    warn("[trakis Hub] TextLabel do quadro não encontrado. Aguardando carregar...")
+    repeat
+        task.wait(0.25)
+        BoardLabel = Words:FindFirstChildWhichIsA("TextLabel", true)
+    until BoardLabel
+end
+
+--// Remote
+local BoardRemote =
+    ReplicatedStorage:WaitForChild("RE")
+    :WaitForChild("1Schoo1lDr1yBoard1s")
+
+--// Escrever no quadro
+local function WriteBoard(text)
+    text = tostring(text or "")
+
+    BoardRemote:FireServer(
+        "ReturningBoardName",
+        BoardCount,
+        text
+    )
+end
+
+--// Ler o quadro
+local function ReadBoard()
+    return BoardLabel and BoardLabel.Text or ""
+end
 
 getgenv().KitKatConfig = {
     AuthorizedPlayersURL = "https://raw.githubusercontent.com/trakishub/Admin/refs/heads/main/README.md",
@@ -9052,7 +9145,7 @@ local function GetCargo(playerName)
     if getgenv().VortexConfig.SpecialTags[playerName] then
         return getgenv().VortexConfig.SpecialTags[playerName]
     elseif IsPlayerAuthorized(playerName) then
-        return "Moderador Trakis"
+        return "Moderador Vortex"
     end
     return ""
 end
@@ -9182,3 +9275,5 @@ trackThread(task.spawn(function()
         end
     end
 end))
+
+
